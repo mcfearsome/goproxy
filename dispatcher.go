@@ -92,7 +92,7 @@ func ReqHostIs(hosts ...string) ReqConditionFunc {
 		hostSet[h] = true
 	}
 	return func(req *http.Request, ctx *ProxyCtx) bool {
-		_, ok := hostSet[req.URL.Host]
+		_, ok := hostSet[strings.Split(req.URL.Host, ":")[0]]
 		return ok
 	}
 }
